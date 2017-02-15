@@ -7,6 +7,7 @@ import {
 import uuidV4 from 'uuid/v4';
 
 import Constant from '../Constant';
+import SPFullScreen from './subpages/SPFullScreen';
 import SPHome from './subpages/SPHome';
 import SPLove from './subpages/SPLove';
 import SPProfile from './subpages/SPProfile';
@@ -177,17 +178,20 @@ class Page extends Component {
               renderRow={(rowData) => {
                 let SubPage = null;
                 switch (rowData.subpageType) {
+                  case Constant.SUBPAGE.SPFullScreen:
+                    SubPage = SPFullScreen;
+                    break;
                   case Constant.SUBPAGE.SPHome:
                     SubPage = SPHome;
-                    break;
-                  case Constant.SUBPAGE.SPSearch:
-                    SubPage = SPSearch;
                     break;
                   case Constant.SUBPAGE.SPLove:
                     SubPage = SPLove;
                     break;
                   case Constant.SUBPAGE.SPProfile:
                     SubPage = SPProfile;
+                    break;
+                  case Constant.SUBPAGE.SPSearch:
+                    SubPage = SPSearch;
                     break;
                 }
                 if (SubPage !== null) {

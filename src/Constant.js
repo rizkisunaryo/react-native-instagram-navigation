@@ -18,7 +18,7 @@ module.exports = {
     CHANGE_PAGE_BACK: 'CHANGE_PAGE_BACK',
     SET_ASK_PAGE_TO_SET_CURRENT_SUBPAGE_ID:
       'SET_ASK_PAGE_TO_SET_CURRENT_SUBPAGE_ID',
-    SET_BACK_ANDROID: 'SET_BACK_ANDROID', 
+    SET_BACK_ANDROID: 'SET_BACK_ANDROID',
     SET_BACK_SUBPAGE: 'SET_BACK_SUBPAGE',
     SET_BACK_PAGE: 'SET_BACK_PAGE',
     SET_CURRENT_SUBPAGE_ID: 'SET_CURRENT_SUBPAGE_ID',
@@ -48,6 +48,7 @@ module.exports = {
     SEARCH: 'SEARCH',
   },
   SUBPAGE: {
+    SPFullScreen: 'SPFullScreen',
     SPHome: 'SPHome',
     SPLove: 'SPLove',
     SPProfile: 'SPProfile',

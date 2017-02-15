@@ -34,7 +34,7 @@ class AddButton extends Component {
             onPress={() => {
               this.props.changePage(Constant.PAGE.FULL_SCREEN);
               this.props.setNextSubpage(Constant.PAGE.FULL_SCREEN,
-                Constant.PAGE.HOME);
+                Constant.SUBPAGE.SPFullScreen);
             }}>
             <Image source={require('../../assets/img/add_gray.png')}
               style={Constant.STYLE.BOTTOM_BUTTON_IMAGE_STYLE}
