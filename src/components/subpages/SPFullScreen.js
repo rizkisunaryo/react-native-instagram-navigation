@@ -53,6 +53,8 @@ class SPFullScreen extends Component {
           return (
             <View>
               <Text
+                onPress={this.props.setExitFullscreen}>EXIT FULL SCREEN</Text>
+              <Text
                 onPress={() => {
                   if (this.props.page.page === this.props.containerPage
                     && this.props.currentSubpageId.id === this.props.id) {

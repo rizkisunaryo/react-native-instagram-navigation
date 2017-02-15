@@ -32,8 +32,8 @@ class AddButton extends Component {
             style={Constant.STYLE.BOTTOM_BUTTON_STYLE}
             activeOpacity={1}
             onPress={() => {
-              this.props.changePage(Constant.PAGE.FULL_SCREEN);
-              this.props.setNextSubpage(Constant.PAGE.FULL_SCREEN,
+              this.props.changePage(Constant.PAGE.FULLSCREEN);
+              this.props.setNextSubpage(Constant.PAGE.FULLSCREEN,
                 Constant.SUBPAGE.SPFullScreen);
             }}>
             <Image source={require('../../assets/img/add_gray.png')}

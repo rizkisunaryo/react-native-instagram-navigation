@@ -71,11 +71,24 @@ function currentSubpageId(state = {
   }
 }
 
+function exitFullscreen(state = {
+  flagNew: '',
+}, action) {
+  switch (action.type) {
+    case Constant.ACTION.SET_EXIT_FULLSCREEN:
+      return {
+        flagNew: uuidV4(),
+      }
+    default:
+      return state;
+  }
+}
+
 function hideFullscreen(state = {
   flagNew: '',
 }, action) {
   switch (action.type) {
-    case Constant.ACTION.SET_HIDE_FULL_SCREEN:
+    case Constant.ACTION.SET_HIDE_FULLSCREEN:
       return {
         flagNew: uuidV4(),
       }
@@ -157,10 +170,11 @@ function subpageScrollTop(state = {
 
 const asyncReducers = combineReducers({
   askPageToSetCurrentSubpageId,
-  backAndroid, 
+  backAndroid,
   backPage,
   backSubpage,
   currentSubpageId,
+  exitFullscreen,
   hideFullscreen,
   nextSubpage,
   page,

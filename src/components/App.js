@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {
-  BackAndroid, 
+  BackAndroid,
   ListView,
   Text,
   View,
@@ -60,7 +60,7 @@ class App extends Component {
           this.pageScroll.scrollTo({
             x:Constant.DIMENSION.WINDOW_WIDTH * 3, animated:false});
           break;
-        case Constant.PAGE.FULL_SCREEN:
+        case Constant.PAGE.FULLSCREEN:
           this.setState({fullScreenTop:Constant.DIMENSION.TOP_MARGIN_HEIGHT});
           break;
       }
@@ -122,9 +122,9 @@ class App extends Component {
           <ProfileButton />
         </View>
         <View
-          style={{height:Constant.DIMENSION.FULL_SCREEN_CONTENT_HEIGHT,
+          style={{height:Constant.DIMENSION.FULLSCREEN_CONTENT_HEIGHT,
             top:fullScreenTop, position:'absolute'}}>
-          <Page containerOf={Constant.PAGE.FULL_SCREEN}
+          <Page containerOf={Constant.PAGE.FULLSCREEN}
             backgroundColor='white' />
         </View>
       </View>

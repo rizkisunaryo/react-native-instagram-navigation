@@ -23,7 +23,7 @@ export function setAskPageToSetCurrentSubpageId(containerPage) {
 
 export function setBackAndroid() {
   return {
-    type: Constant.ACTION.SET_BACK_ANDROID, 
+    type: Constant.ACTION.SET_BACK_ANDROID,
   }
 }
 
@@ -47,9 +47,15 @@ export function setCurrentSubpageId(id) {
   }
 }
 
+export function setExitFullscreen() {
+  return {
+    type: Constant.ACTION.SET_EXIT_FULLSCREEN,
+  }
+}
+
 export function setHideFullscreen() {
   return {
-    type: Constant.ACTION.SET_HIDE_FULL_SCREEN,
+    type: Constant.ACTION.SET_HIDE_FULLSCREEN,
   }
 }
 

@@ -20,6 +20,8 @@ class Page extends Component {
     this.state = {
       subpageData: [],
     };
+
+    this._exitFullscreen = this._exitFullscreen.bind(this);
   }
 
   componentDidMount() {
@@ -28,7 +30,7 @@ class Page extends Component {
 
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     let id = uuidV4();
-    if (containerOf !== Constant.PAGE.FULL_SCREEN) {
+    if (containerOf !== Constant.PAGE.FULLSCREEN) {
       let subpageType;
       switch (containerOf) {
         case Constant.PAGE.HOME:
@@ -111,11 +113,9 @@ class Page extends Component {
             this.subpageScroll.scrollTo({x, animated:false});
           })
         }
-        else if (nextProps.containerOf === Constant.PAGE.FULL_SCREEN
+        else if (nextProps.containerOf === Constant.PAGE.FULLSCREEN
           && this.state.subpageData.length === 1) {
-          this.setState({subpageData:[]});
-          this.props.setHideFullscreen();
-          this.props.setBackPage();
+          this._exitFullscreen();
         }
         else {
           this.props.setBackPage();
@@ -150,6 +150,17 @@ class Page extends Component {
         this.state.subpageData[this.state.subpageData.length - 1];
       this.props.setCurrentSubpageId(lastSubpage.id);
     }
+    if (this.props.exitFullscreen.flagNew
+      !== nextProps.exitFullscreen.flagNew
+      && nextProps.containerOf === Constant.PAGE.FULLSCREEN) {
+      this._exitFullscreen();
+    }
+  }
+
+  _exitFullscreen() {
+    this.setState({subpageData:[]});
+    this.props.setHideFullscreen();
+    this.props.setBackPage();
   }
 
   render() {
@@ -241,6 +252,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     askPageToSetCurrentSubpageId: state.askPageToSetCurrentSubpageId,
     backSubpage: state.backSubpage,
+    exitFullscreen: state.exitFullscreen,
     nextSubpage: state.nextSubpage,
     page: state.page,
     pressSameButton: state.pressSameButton,
