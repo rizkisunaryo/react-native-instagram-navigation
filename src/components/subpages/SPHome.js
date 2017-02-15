@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import Constant from '../../Constant';
 
-class SPHome extends Component {
+export default class SPHome extends Component {
   constructor(props) {
     super(props);
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -17,22 +17,6 @@ class SPHome extends Component {
     this.state = {
       dataSource: ds.cloneWithRows(arr)
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.subpageScrollTop.flagNew
-      !== nextProps.subpageScrollTop.flagNew
-      && nextProps.subpageScrollTop.containerPage
-        === nextProps.containerPage
-      && nextProps.subpageScrollTop.subpageId === nextProps.id) {
-      this.subpageScroll.scrollTo({y:0, animated:true});
-    }
-    if (this.props.backAndroid.flagNew !== nextProps.backAndroid.flagNew) {
-      if (nextProps.page.page === nextProps.containerPage
-        && nextProps.currentSubpageId.id === nextProps.id) {
-        this.props.setBackSubpage(nextProps.containerPage);
-      }
-    }
   }
 
   render() {
@@ -53,17 +37,11 @@ class SPHome extends Component {
           return (
             <View>
               <Text
-                onPress={() => {
-                  if (this.props.page.page === this.props.containerPage
-                    && this.props.currentSubpageId.id === this.props.id) {
-                    this.props.setBackSubpage(containerPage);
-                  }
-                }}>BACK</Text>
+                onPress={this.props.back}>BACK</Text>
               <Text>Home: {id}: {rowData}</Text>
               <Text
                 onPress={() => {
-                  this.props.setNextSubpage(
-                    containerPage,
+                  this.props.next(
                     Constant.SUBPAGE.SPHome
                   )
                 }}>NEXT</Text>
@@ -74,29 +52,3 @@ class SPHome extends Component {
     );
   }
 }
-
-SPHome.propTypes = {
-  id: PropTypes.string.isRequired,
-  containerPage: PropTypes.string.isRequired,
-};
-
-
-import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as Actions from '../../redux/Actions';
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    backAndroid: state.backAndroid,
-    currentSubpageId: state.currentSubpageId,
-    page: state.page,
-    subpageScrollTop: state.subpageScrollTop,
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  function(dispatch, ownProps) {
-    return bindActionCreators(Actions, dispatch)
-  },
-)(SPHome)
