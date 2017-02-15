@@ -68,16 +68,16 @@ export function setNextSubpage(containerPage, subpageType, data = null) {
   }
 }
 
-export function setNextSubPageDone() {
-  return {
-    type: Constant.ACTION.SET_NEXT_SUBPAGE_DONE,
-  }
-}
-
 export function setPressSameButton(page) {
   return {
     type: Constant.ACTION.SET_PRESS_SAME_BUTTON,
     page
+  }
+}
+
+export function setStartUpDone() {
+  return {
+    type: Constant.ACTION.SET_START_UP_DONE,
   }
 }
 

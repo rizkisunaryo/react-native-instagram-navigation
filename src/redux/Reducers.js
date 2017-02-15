@@ -116,19 +116,6 @@ function nextSubpage(state = {
   }
 }
 
-function nextSubpageDone(state = {
-  flagNew: '',
-}, action) {
-  switch (action.type) {
-    case Constant.ACTION.SET_NEXT_SUBPAGE_DONE:
-      return {
-        flagNew: uuidV4(),
-      }
-    default:
-      return state;
-  }
-}
-
 function page(state = {
   page: Constant.PAGE.HOME,
   isBack: false,
@@ -164,6 +151,19 @@ function pressSameButton(state = {
   }
 }
 
+function startUpDone(state = {
+  flagNew: '',
+}, action) {
+  switch (action.type) {
+    case Constant.ACTION.SET_START_UP_DONE:
+      return {
+        flagNew: uuidV4(),
+      }
+    default:
+      return state;
+  }
+}
+
 function subpageScrollTop(state = {
   flagNew: '',
   containerPage: '',
@@ -190,9 +190,9 @@ const asyncReducers = combineReducers({
   exitFullscreen,
   hideFullscreen,
   nextSubpage,
-  nextSubpageDone, 
   page,
   pressSameButton,
+  startUpDone,
   subpageScrollTop,
 });
 

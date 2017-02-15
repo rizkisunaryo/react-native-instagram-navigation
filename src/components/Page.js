@@ -92,7 +92,7 @@ class Page extends Component {
                   let x =
                     subpageDataPrevLength * Constant.DIMENSION.WINDOW_WIDTH;
                   this.subpageScroll.scrollTo({x, animated:false});
-                  this.props.setNextSubPageDone();
+                  this.props.setStartUpDone();
                 }
               }
               scrollToNext();

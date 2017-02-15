@@ -98,7 +98,7 @@ class App extends Component {
       !== nextProps.hideFullscreen.flagNew) {
       this.setState({fullScreenTop:Constant.DIMENSION.WINDOW_HEIGHT});
     }
-    if (nextProps.nextSubpageDone.flagNew !== '') {
+    if (nextProps.startUpDone.flagNew !== '') {
       this.setState({coverDimension:this.coverDimension.hidden});
     }
   }
@@ -173,7 +173,7 @@ const mapStateToProps = (state, ownProps) => {
     backPage: state.backPage,
     hideFullscreen: state.hideFullscreen,
     page: state.page,
-    nextSubpageDone: state.nextSubpageDone,
+    startUpDone: state.startUpDone,
   }
 }
 
