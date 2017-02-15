@@ -116,6 +116,19 @@ function nextSubpage(state = {
   }
 }
 
+function nextSubpageDone(state = {
+  flagNew: '',
+}, action) {
+  switch (action.type) {
+    case Constant.ACTION.SET_NEXT_SUBPAGE_DONE:
+      return {
+        flagNew: uuidV4(),
+      }
+    default:
+      return state;
+  }
+}
+
 function page(state = {
   page: Constant.PAGE.HOME,
   isBack: false,
@@ -177,6 +190,7 @@ const asyncReducers = combineReducers({
   exitFullscreen,
   hideFullscreen,
   nextSubpage,
+  nextSubpageDone, 
   page,
   pressSameButton,
   subpageScrollTop,

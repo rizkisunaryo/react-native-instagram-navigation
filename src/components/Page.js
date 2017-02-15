@@ -74,24 +74,35 @@ class Page extends Component {
         let subpageDataPrevLength = this.state.subpageData.length;
 
         this.state.subpageData.push({id, subpageType, data});
-        this.setState({
-          subpageData: this.state.subpageData,
-          dataSource: this.state.dataSource.cloneWithRows(
-            this.state.subpageData
-          ),
-        }, () => {
-          let scrollToNext = () => {
-            if (this.pageScrollWidth <
-              (subpageDataPrevLength + 1) * Constant.DIMENSION.WINDOW_WIDTH) {
-              setTimeout(scrollToNext, 100);
-            }
-            else {
-              let x = subpageDataPrevLength * Constant.DIMENSION.WINDOW_WIDTH;
-              this.subpageScroll.scrollTo({x, animated:false});
-            }
+        let setNextSubPage = () => {
+          if (this.state.dataSource) {
+            this.setState({
+              subpageData: this.state.subpageData,
+              dataSource: this.state.dataSource.cloneWithRows(
+                this.state.subpageData
+              ),
+            }, () => {
+              let scrollToNext = () => {
+                if (this.pageScrollWidth <
+                  (subpageDataPrevLength + 1)
+                    * Constant.DIMENSION.WINDOW_WIDTH) {
+                  setTimeout(scrollToNext, 100);
+                }
+                else {
+                  let x =
+                    subpageDataPrevLength * Constant.DIMENSION.WINDOW_WIDTH;
+                  this.subpageScroll.scrollTo({x, animated:false});
+                  this.props.setNextSubPageDone();
+                }
+              }
+              scrollToNext();
+            })
           }
-          scrollToNext();
-        })
+          else {
+            setTimeout(setNextSubPage, 100);
+          }
+        }
+        setNextSubPage();
       }
     }
     if (this.props.backSubpage.flagNew !== nextProps.backSubpage.flagNew) {

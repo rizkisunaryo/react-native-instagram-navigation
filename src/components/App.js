@@ -19,8 +19,17 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    this.coverDimension = {
+      initial: {
+        width: Constant.DIMENSION.WINDOW_WIDTH,
+        height: Constant.DIMENSION.WINDOW_HEIGHT,
+      },
+      hidden: {width:0, height:0},
+    }
+
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
+      coverDimension: this.coverDimension.initial,
       dataSource: ds.cloneWithRows([
         Constant.PAGE.HOME,
         Constant.PAGE.SEARCH,
@@ -40,6 +49,18 @@ class App extends Component {
       this.props.setBackAndroid();
       return true;
     });
+
+    /*
+      IF THERE IS AN ACTION AT START UP
+      EXAMPLE: SHOWING LOGIN PAGE, HANDLE PUSH NOTIF, ETC
+    */
+    // this.props.changePage(Constant.PAGE.FULLSCREEN);
+    // this.props.setNextSubpage(Constant.PAGE.FULLSCREEN,
+    //   Constant.SUBPAGE.SPFullScreen);
+
+    setTimeout(() => {
+      this.setState({coverDimension: this.coverDimension.hidden});
+    }, 500);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -77,6 +98,9 @@ class App extends Component {
       !== nextProps.hideFullscreen.flagNew) {
       this.setState({fullScreenTop:Constant.DIMENSION.WINDOW_HEIGHT});
     }
+    if (nextProps.nextSubpageDone.flagNew !== '') {
+      this.setState({coverDimension:this.coverDimension.hidden});
+    }
   }
 
   _addToPageHistory(curPage, nextPage) {
@@ -91,7 +115,7 @@ class App extends Component {
   }
 
   render() {
-    let {dataSource, fullScreenTop} = this.state;
+    let {coverDimension, dataSource, fullScreenTop} = this.state;
 
     return (
       <View>
@@ -127,6 +151,11 @@ class App extends Component {
           <Page containerOf={Constant.PAGE.FULLSCREEN}
             backgroundColor='white' />
         </View>
+
+        {/* cover at start up*/}
+        <View
+          style={{...coverDimension, top:0, left:0,
+            position:'absolute', backgroundColor:'white'}}></View>
       </View>
     );
   }
@@ -144,6 +173,7 @@ const mapStateToProps = (state, ownProps) => {
     backPage: state.backPage,
     hideFullscreen: state.hideFullscreen,
     page: state.page,
+    nextSubpageDone: state.nextSubpageDone,
   }
 }
 
